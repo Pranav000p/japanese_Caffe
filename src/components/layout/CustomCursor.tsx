@@ -19,8 +19,9 @@ export default function CustomCursor() {
   const ringY = useSpring(cursorY, ringSpringConfig)
 
   useEffect(() => {
-    // Only show on desktop
-    if (window.innerWidth < 1024) return
+    // Only show on desktop and non-touch devices
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
+    if (window.innerWidth < 1024 || isTouchDevice) return
 
     setIsVisible(true)
 

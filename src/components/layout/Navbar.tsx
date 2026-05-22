@@ -36,12 +36,12 @@ export default function Navbar() {
     <>
       <motion.nav
         id="main-nav"
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-2 md:px-6 py-3 rounded-full flex items-center gap-6 transition-all duration-500"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-4 md:px-6 py-2.5 md:py-3 rounded-full flex items-center justify-between md:justify-start w-[92vw] md:w-auto gap-4 md:gap-6 transition-all duration-500"
         style={{
-          backgroundColor: scrolled ? 'rgba(26, 20, 16, 0.7)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
-          border: scrolled ? '1px solid rgba(212, 134, 58, 0.2)' : '1px solid transparent',
+          backgroundColor: scrolled ? 'rgba(26, 20, 16, 0.8)' : 'rgba(26, 20, 16, 0.3)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          border: '1px solid rgba(212, 134, 58, 0.2)',
         }}
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -81,7 +81,7 @@ export default function Navbar() {
         {/* Mobile hamburger */}
         <button
           id="mobile-menu-toggle"
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col gap-1.5 p-2 z-50 relative"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="メニューを開く"
         >
@@ -107,50 +107,55 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 md:hidden"
-            style={{ backgroundColor: 'var(--coal)' }}
+            className="fixed inset-0 z-40 flex flex-col items-center justify-start overflow-y-auto py-28 px-6 md:hidden"
+            style={{
+              background: 'radial-gradient(circle at center, rgba(26, 20, 16, 0.98) 0%, rgba(13, 14, 15, 1) 100%)',
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {navLinks.map((link, i) => (
+            <div className="flex flex-col items-center gap-8 my-auto">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ delay: i * 0.1, duration: 0.4 }}
+                >
+                  <Link
+                    href={link.href}
+                    className="font-mincho text-3xl font-medium transition-colors duration-300 hover:text-[var(--amber)] active:text-[var(--amber)]"
+                    style={{ color: 'var(--white)' }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
               <motion.div
-                key={link.href}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
+                transition={{ delay: 0.4, duration: 0.4 }}
+                className="mt-4"
               >
                 <Link
-                  href={link.href}
-                  className="font-mincho text-3xl"
-                  style={{ color: 'var(--white)' }}
+                  href="/contact"
+                  className="font-gothic text-lg px-8 py-3 rounded-full transition-transform active:scale-95"
+                  style={{
+                    backgroundColor: 'var(--amber)',
+                    color: 'var(--coal)',
+                    fontWeight: 500,
+                  }}
                   onClick={() => setMobileOpen(false)}
                 >
-                  {link.label}
+                  予約する
                 </Link>
               </motion.div>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ delay: 0.4, duration: 0.4 }}
-            >
-              <Link
-                href="/contact"
-                className="font-gothic text-lg px-8 py-3 rounded-full"
-                style={{
-                  backgroundColor: 'var(--amber)',
-                  color: 'var(--coal)',
-                  fontWeight: 500,
-                }}
-                onClick={() => setMobileOpen(false)}
-              >
-                予約する
-              </Link>
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

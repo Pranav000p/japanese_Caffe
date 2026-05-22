@@ -124,7 +124,7 @@ export default function AboutPage() {
                   />
 
                   {/* Content */}
-                  <div className={`ml-14 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
+                  <div className={`ml-14 md:ml-0 w-full md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
                     <span className="font-mincho text-sm font-bold block mb-2" style={{ color: 'var(--amber)' }}>
                       {item.year}
                     </span>

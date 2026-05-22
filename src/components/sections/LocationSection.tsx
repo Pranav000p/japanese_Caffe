@@ -128,7 +128,7 @@ export default function LocationSection() {
             }}
           >
             {/* Illustrated map feel */}
-            <div className="relative w-full h-full min-h-[400px] flex items-center justify-center p-8">
+            <div className="relative w-full h-full min-h-[300px] md:min-h-[400px] flex items-center justify-center p-8">
               {/* Grid lines background */}
               <div
                 className="absolute inset-0 opacity-5"

@@ -19,7 +19,7 @@ const galleryImages = [
     alt: '日本のイラスト',
     caption: '和の美学',
     width: 'md:col-span-1',
-    aspect: 'aspect-[3/4]',
+    aspect: 'aspect-[16/9] md:aspect-[3/4]',
     rotation: 'rotate-[1deg]',
   },
   {
@@ -27,7 +27,7 @@ const galleryImages = [
     alt: '夜のカフェ',
     caption: '雨夜の灯り',
     width: 'md:col-span-1',
-    aspect: 'aspect-[3/4]',
+    aspect: 'aspect-[16/9] md:aspect-[3/4]',
     rotation: 'rotate-[-1deg]',
   },
   {

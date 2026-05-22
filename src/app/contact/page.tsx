@@ -62,9 +62,9 @@ export default function ContactPage() {
     <>
       {/* Hero area with parallax storefront */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Left parallax image — desktop only */}
+        {/* Parallax background storefront image */}
         <motion.div
-          className="hidden lg:block absolute left-0 top-0 w-1/2 h-full"
+          className="absolute inset-0 lg:right-1/2 w-full lg:w-1/2 h-full"
           style={{ y: imageY }}
         >
           <Image
@@ -73,16 +73,24 @@ export default function ContactPage() {
             fill
             priority
             className="object-cover"
-            sizes="50vw"
+            sizes="(max-width: 1024px) 100vw, 50vw"
           />
+          {/* Mobile dark overlay — highly opaque for readability */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 block lg:hidden"
             style={{
-              background: 'linear-gradient(to right, transparent 60%, var(--coal) 100%)',
+              background: 'linear-gradient(to bottom, rgba(13, 14, 15, 0.85) 0%, rgba(13, 14, 15, 0.95) 100%)',
+            }}
+          />
+          {/* Desktop fade overlay */}
+          <div
+            className="hidden lg:block absolute inset-0"
+            style={{
+              background: 'linear-gradient(to right, transparent 50%, var(--coal) 100%)',
             }}
           />
           <div
-            className="absolute inset-0"
+            className="hidden lg:block absolute inset-0"
             style={{ backgroundColor: 'rgba(13, 14, 15, 0.3)' }}
           />
         </motion.div>
