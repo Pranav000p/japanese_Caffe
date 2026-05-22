@@ -1,0 +1,307 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Zen+Old+Mincho:wght@400;700;900&display=swap");
+@import "tailwindcss";
+
+/* ===== CSS Custom Properties ===== */
+:root {
+  --coal: #0d0e0f;
+  --ink: #1a1410;
+  --washi: #f5efe6;
+  --amber: #d4863a;
+  --neon: #ff4d5a;
+  --mist: #8ba3a8;
+  --white: #faf8f5;
+
+  /* Font Families */
+  --font-zen-mincho: "Zen Old Mincho", serif;
+  --font-noto-sans-jp: "Noto Sans JP", sans-serif;
+}
+
+/* ===== Base Styles ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--coal);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ===== Custom Cursor (hide default on desktop) ===== */
+@media (min-width: 1024px) {
+  html {
+    cursor: none;
+  }
+  a, button {
+    cursor: none;
+  }
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: var(--amber);
+  color: var(--coal);
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--coal);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--amber);
+  border-radius: 2px;
+}
+
+/* ===== Keyframe Animations ===== */
+@keyframes bloom {
+  0% {
+    opacity: 0;
+    filter: brightness(3) blur(40px);
+  }
+  40% {
+    opacity: 0.9;
+    filter: brightness(1.8) blur(8px);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) blur(0px);
+  }
+}
+
+@keyframes inkReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes steam {
+  0% {
+    transform: translateY(0) scaleX(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-30px) scaleX(1.4);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-60px) scaleX(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes pulseDown {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.5;
+  }
+}
+
+@keyframes rain {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes brushDraw {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ===== Animation Utility Classes ===== */
+.animate-bloom {
+  animation: bloom 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-ink-reveal {
+  animation: inkReveal 1.2s ease forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-steam {
+  animation: steam 2s ease-in-out infinite;
+}
+
+.animate-pulse-down {
+  animation: pulseDown 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(212, 134, 58, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.animate-brush-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: brushDraw 2s ease forwards;
+}
+
+/* ===== Typography ===== */
+.font-mincho {
+  font-family: var(--font-zen-mincho), serif;
+}
+
+.font-gothic {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+}
+
+/* ===== Text Colors ===== */
+.text-coal { color: var(--coal); }
+.text-ink { color: var(--ink); }
+.text-washi { color: var(--washi); }
+.text-amber { color: var(--amber); }
+.text-neon { color: var(--neon); }
+.text-mist { color: var(--mist); }
+
+/* ===== Background Colors ===== */
+.bg-coal { background-color: var(--coal); }
+.bg-ink { background-color: var(--ink); }
+.bg-washi { background-color: var(--washi); }
+.bg-amber { background-color: var(--amber); }
+
+/* ===== Border Colors ===== */
+.border-amber { border-color: var(--amber); }
+
+/* ===== Noise Texture ===== */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* ===== Washi Paper Texture ===== */
+.washi-texture {
+  background-color: var(--washi);
+  background-image: 
+    radial-gradient(ellipse at 20% 50%, rgba(210, 180, 140, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(210, 180, 140, 0.1) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ===== Glass Effect ===== */
+.glass {
+  background: rgba(26, 20, 16, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 134, 58, 0.2);
+}
+
+/* ===== Ink Brush Stroke ===== */
+.ink-stroke {
+  position: relative;
+}
+
+.ink-stroke::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--amber);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ink-stroke:hover::after {
+  transform: scaleX(1);
+}
+
+/* ===== Steam Effect ===== */
+.steam-wisp {
+  position: absolute;
+  width: 3px;
+  height: 20px;
+  background: rgba(212, 134, 58, 0.4);
+  border-radius: 9999px;
+  animation: steam 2s ease-in-out infinite;
+}
+
+.steam-wisp:nth-child(2) {
+  animation-delay: 0.3s;
+  left: 8px;
+}
+
+.steam-wisp:nth-child(3) {
+  animation-delay: 0.6s;
+  left: 16px;
+}
+
+/* ===== Form Input Styles ===== */
+.input-underline {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(212, 134, 58, 0.3);
+  padding: 12px 0;
+  color: var(--white);
+  font-size: 1rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-underline:focus {
+  border-bottom-color: var(--amber);
+  box-shadow: 0 2px 8px rgba(212, 134, 58, 0.15);
+}
+
+.input-underline::placeholder {
+  color: var(--mist);
+  opacity: 0.6;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+}
